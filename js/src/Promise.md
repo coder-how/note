@@ -216,3 +216,5 @@ HyPromise.all([p1, p2, p3]).then((res) => { console.log('all', res) }, (err) => 
 
 ```
 
+## Promise常见面试题
+
