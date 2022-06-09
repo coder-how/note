@@ -1,5 +1,18 @@
 # git分支
 
+## 配置用户以及账号
+
+```
+// 本地
+git config user.name ''
+git config user.email ''
+// 全局
+git config --global --replace-all user.name ''
+git config --global user.email ''
+```
+
+
+
 ## git分支切换
 
 前提：先检查
