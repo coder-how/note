@@ -83,7 +83,13 @@ git config credential.helper ‘cache –timeout=3600’
 
 查看贮藏的东西，可以使用 git stash list
 
-将你刚刚贮藏的工作重新应用：git stash apply
+将你最近一个贮藏的工作重新应用：git stash apply
+
+指定一个暂存的分支重新应用：git stash apply stash@{<number>}
+
+可以运行 git stash drop 加上将要移除的贮藏的名 字来移除它
+
+可以运行 git stash pop 来应用贮藏然后立即从栈上扔掉它
 
 ## git从远程拉取本地不存在的分支
 
@@ -99,9 +105,9 @@ git branch -vv
 
 新建分支并切换到指定分支,并和指定的远程分支关联
 git checkout -b <local branch name> origin/xxxxxxxx
-
 将本地分支推送到远程
 git push <远程主机名> <本地分支名>:<远程分支名>
 ```
 
-## 
+## git暂存
+

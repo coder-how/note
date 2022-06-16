@@ -91,3 +91,19 @@ exports = module.exports
 1. 同步加载执行，可能会阻塞程序
    - 使用同步原因：适用场景多为服务器，多为本地文件，一般不影响性能
    - es module为异步，原因：多为网络请求，
+
+## es6中模块的this
+
+ES6 的模块自动采用严格模式，不管你有没有在模块头部加上`"use strict";`
+
+严格模式：禁止`this`指向全局对象，
+
+在chrome中，模块的this为undefined
+
+但是在html中，以普通js引入则为window
+
+```
+<script src="./test.js" type="module"></script>	// 文件中this为undefined
+<script src="./test.js"></script>	// 文件中this为window在chrome，或者浏览器中
+```
+
