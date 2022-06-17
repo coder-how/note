@@ -278,3 +278,88 @@ server.listen(8888, '127.0.0.1', () => {
 ![image-20220616140836708](\img\image-20220616140836708.png)
 
 在node端打印信息console.log(req.method)，也可以看到打印了OPTIONS  PUT
+
+
+
+当请求头中的Content-Type为其他值时，服务器端的`Access-Control-Allow-Headers`字段，设置中也需要包含Content-Type
+
+Content-Type没有设置其他值，简单请求，无问题
+
+```
+// serverr.js
+const http = require('http')
+
+const server = http.createServer((req, res) => {
+  console.log(req.method)
+  if (req.headers.origin) {
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
+  }
+  if (req.method.toLocaleLowerCase() === 'options') {
+    res.setHeader('Access-Control-Allow-Methods', 'PUT, POST')
+  }
+  res.statusCode = 200
+  req.on('data', data => {
+    console.log(data)
+  })
+  res.end('hello serve2')
+})
+server.listen(8888, '127.0.0.1', () => {
+  console.log('serve start success')
+})
+
+// html
+let xhr = new XMLHttpRequest()
+let data = {
+  test: 'echo'
+}
+let param = JSON.stringify(data)
+xhr.open('POST', 'http://127.0.0.1:8888')
+
+xhr.onreadystatechange = function(){
+  if (xhr.readyState === 4){
+    if (xhr.status === 200){
+      console.log(xhr.responseText);
+    } else {
+      console.error(xhr.statusText);
+    }
+  }
+};
+xhr.send(param)
+
+```
+
+
+
+还是属于简单请求，
+
+![image-20220617184637655](img\image-20220617184637655.png)
+
+
+
+Content-Type为其他值，服务器端没有处理有问题
+
+```
+// html代码修改，添加一行代码
+xhr.setRequestHeader('Content-Type', 'application/json');
+
+```
+
+![image-20220617184840661](img\image-20220617184840661.png)
+
+![image-20220617185252899](\img\image-20220617185252899.png)
+
+服务端没有返回`Access-Control-Allow-Headers`字段，错误
+
+
+
+服务器端处理，没有问题
+
+```
+// server.js
+res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+
+服务器端拿到的数据：
+<Buffer 7b 22 74 65 73 74 22 3a 22 65 63 68 6f 22 7d>
+```
+
+当第一种情况，简单请求，没有设置application/json，服务器端没有设置`Access-Control-Allow-Headers`字段，拿到的数据是一样的，Content-Type只是用于怎么样解析数据，（规范）
