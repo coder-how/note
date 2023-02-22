@@ -111,3 +111,17 @@ git push <远程主机名> <本地分支名>:<远程分支名>
 
 ## git暂存
 
+
+
+```
+git stash pop
+git stash
+git stash -u
+git stash apply stash@{2}
+ git stash drop stash@{0}
+window shell问题，使用  git stash drop stash@”{0}“
+git stash save 'xxxx'
+
+
+```
+
