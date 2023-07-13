@@ -121,7 +121,7 @@ git stash apply stash@{2}
  git stash drop stash@{0}
 window shell问题，使用  git stash drop stash@”{0}“
 git stash save 'xxxx'
-
+git stash list
 
 ```
 
