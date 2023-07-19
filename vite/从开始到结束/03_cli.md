@@ -1,6 +1,6 @@
 # cli
 
-
+## 注册
 
 定义了命令行的类
 
@@ -18,5 +18,25 @@
 
 ```
 
+支持链式调用
 
+```
+.option 根据后面的参数，进行个性化处理
+.alias 别名
+.action 执行这个命令，执行的函数
+等
+```
+
+## 执行顺序
+
+```
+1. cli.parse();
+命令匹配，执行哪个命令
+2. this.runMatchedCommand();
+执行匹配的命令
+3. command.commandAction.apply(this, actionArgs);
+command.commandAction   action 注册的命令
+4. 
+
+```
 
