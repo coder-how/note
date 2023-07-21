@@ -36,7 +36,7 @@
 执行匹配的命令
 3. command.commandAction.apply(this, actionArgs);
 command.commandAction   action 注册的命令
-4. 
+4. 加载有关服务的文件，执行createServer
 
 ```
 
