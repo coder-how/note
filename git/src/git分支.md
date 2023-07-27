@@ -117,11 +117,13 @@ git push <远程主机名> <本地分支名>:<远程分支名>
 git stash pop
 git stash
 git stash -u
-git stash apply stash@{2}
+git stash apply stash@{2} 应用某个存储,但其不会从存储列表中删除
  git stash drop stash@{0}
 window shell问题，使用  git stash drop stash@”{0}“
 git stash save 'xxxx'
 git stash list
-
+git stash show : 显示改动信息
+git stash show stash@{1}
+git stash show -p : 显示第一个存储的改动
 ```
 
